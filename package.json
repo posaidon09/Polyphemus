@@ -1,0 +1,15 @@
+{
+  "name": "discord-template",
+  "version": "1.0.0",
+  "description": "Template for discord.js node projects",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ."
+  },
+  "keywords": [],
+  "author": "Pixel702",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
+}
