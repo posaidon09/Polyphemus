@@ -1,7 +1,7 @@
 // CONFIG
 const config = {
-	admins: ["533043678307024925"],
-	prefix: "!",
+	admins: ["936638216604385320"],
+	prefix: ".",
 };
 
 // CODE

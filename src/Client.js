@@ -16,7 +16,7 @@ class Client extends Discord.Client {
 		const _debug = debug ?? true;
 		
         const _admins = admins ?? [];
-        const _prefix = prefix ?? "!";
+        const _prefix = prefix ?? ".";
 
 		super({ intents: _intents });
 		
