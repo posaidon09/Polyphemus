@@ -20,7 +20,7 @@ module.exports = class SearchCommand {
         pagecount.setup(message.author.id)
         pagecount.set(message.author.id, 1)
       
-        const page = pagecount.get(message.author.id)
+        var page = pagecount.get(message.author.id)
         const query = args.join(" ")
 
   const [result] = await google.search(query, { page: page });
@@ -52,7 +52,7 @@ module.exports = class SearchCommand {
             
        const collector = msg.createMessageComponentCollector({
       filter: (interaction) => interaction.user.id === message.author.id,
-      time: 60_000
+      time: 6000_000
     });
 
 
@@ -61,7 +61,7 @@ module.exports = class SearchCommand {
           if (!interaction.isButton()) return;
           //NEXT
           if (interaction.customId === "next") {
-              const page2 = pagecount.get(message.author.id)
+              var page2 = pagecount.get(message.author.id)
               
               const [result2] = await google.search(query, { page: page2+1 });
               
@@ -77,7 +77,7 @@ module.exports = class SearchCommand {
               interaction.update({ embeds: [embed2], components: [new ActionRowBuilder().addComponents(previ, next)] })
           } else if (interaction.customId === "prev") {
          //PREVIOUS
-              const page3 = pagecount.get(message.author.id)
+              var page3 = pagecount.get(message.author.id)
               
               const [result3] = await google.search(query, { page: page3-1 });
               
@@ -96,7 +96,7 @@ module.exports = class SearchCommand {
         .setColor("#B70061")
         .setFooter({ text: `page ${page3}`, iconURL: message.member.displayAvatarURL() })
             previ.setDisabled(true)
-            interaction.update({ embeds: [embed4], components: [new ActionRowBuilder().addComponents(previ, next)] })
+            interaction.update({ embeds: [embed], components: [new ActionRowBuilder().addComponents(previ, next)] })
             } else {
               interaction.update({ embeds: [embed3], components: [new ActionRowBuilder().addComponents(previ, next)] })
           }

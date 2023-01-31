@@ -6,7 +6,6 @@ class HelpCommand {
 		this.description = "Use to get this help menu";
 
 		this.category = "Information";
-		this.beta = true;
 
 		this.args = {
 			optional: [ "command" ]

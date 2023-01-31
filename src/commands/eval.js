@@ -6,7 +6,7 @@ class EvalCommand {
 		this.hidden = true;
 		this.disabled = true;
 		this.args = {
-		    required: [ "code" ]
+		    required: ["code"]
 		}
 	};
 
