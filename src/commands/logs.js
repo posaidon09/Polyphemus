@@ -13,8 +13,8 @@ class LogCommand {
     async run({
         message, commands, args
     }) {
-        const logchannel = storage.box("logs")
-        const log = args[0]
+        let logchannel = storage.box("logs")
+        let log = args[0]
         
 
 
@@ -37,9 +37,9 @@ class LogCommand {
 
 client.on("messageDelete", async message => {
     storage.load()
-    const chaenele = logchannel.get(message.guild.id)
-    const id = chaenele.match(/<?@?!?(\d{17,19})>?/)[1]
-    const channele = client.channels.cache.get(id)
+    let chaenele = logchannel.get(message.guild.id)
+    let id = chaenele.match(/<?@?!?(\d{17,19})>?/)[1]
+    let channele = client.channels.cache.get(id)
     
     const embed = new Discord.EmbedBuilder()
     .setTitle(`Message deleted by ${message.author.tag}`)
