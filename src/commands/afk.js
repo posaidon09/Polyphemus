@@ -13,7 +13,10 @@ class AfkCommand {
 	    
 	   const reason = storage.box("reason")
 	    
-	    
+	    const attach = storage.box("attachment", "")
+        
+        
+        const attachments = message.attachments.map(a => a.url);
 	    
 	   const raeson = `${args.join(" ")}` ?? ""
 	    
@@ -21,10 +24,25 @@ class AfkCommand {
 	    afk.set(message.author.id, "yes")
 	    
 	    reason.set(message.author.id, raeson)
+	    attach.set(message.author.id, attachments)
+	   
+	   const grab = attach.get(message.author.id)
 	    if (!args.length) {
-	    message.channel.send(`<@${message.author.id}> went afk`)
+	        
+	      
+	    if (message.attachments.size > 0) {
+	    message.channel.send({ content: `<@${message.author.id}> went afk`, files: attachments })
+	    } else if (message.attachments.size == 0) {
+	      
+	        message.channel.send({ content: `<@${message.author.id}> went afk`, files: attachments })
+	        
+	    }
+	  
+	    
 	    } else {
-	    message.channel.send(`<@${message.author.id}> went afk: ${raeson}`)
+	        
+	    message.channel.send({ content: `<@${message.author.id}> went afk: ${raeson}`, files: attachments })
+	    
 	    }
 	    
  
