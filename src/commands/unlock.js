@@ -1,3 +1,4 @@
+const { PermissionsBitField } = require("discord.js")
 module.exports = class UnLockCommand {
 
     constructor() {
@@ -9,8 +10,8 @@ module.exports = class UnLockCommand {
     async run({
         message, commands, args, mentioned
     }) {
-        const PermissionsBitField = require("discord.js")
-        if (message.author.id === "936638216604385320") {
+      
+        if (message.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
 
             message.channel.permissionOverwrites.edit(message.guild.id, {
                 SendMessages: true
@@ -19,7 +20,7 @@ module.exports = class UnLockCommand {
 
             message.channel.send(`Successfully unlocked **${message.channel.name}**`)
         } else {
-            message.channel.send("you cant do that dumbass")
+            message.channel.send("you don't have permission for that")
         }
     }
 }

@@ -11,7 +11,7 @@ class HelpCommand {
 			optional: [ "command" ]
 		};
 
-		this.hex = "#FFDD8B";
+		this.hex = "#FF3DFE";
 	};
 
 	async run({ message, args, handler, utils }) {

@@ -3,12 +3,13 @@ module.exports = class RateThingCommand {
 
 	constructor() {
 		this.name = "ratething";
-		this.description = "Allows you to rate things";
+		this.description = "Allows you to rate users as things";
 		this.category = "Fun";
 	};
 
 	async run({ message, commands, args, mentioned }) {
 	    const rating = args.join(" ")
+	    const target = message.mentions.members.first()
 	    const perc = Math.floor(Math.random() * 101)
 	    if (!args.length) {
 	        const error = new Discord.EmbedBuilder()
@@ -21,7 +22,7 @@ module.exports = class RateThingCommand {
 	        const rate = new Discord.EmbedBuilder()
 	        rate.setTitle(`thing rating`)
 	        rate.setColor("#7300C8")
-	        rate.setDescription(`${rating} is ${perc}/100`)
+	        rate.setDescription(`${target} is ${perc}/100 a ${rating}`)
 	        message.reply({ embeds: [rate] })
 	    }
 	  

@@ -22,9 +22,10 @@ class EvalCommand {
                 || evalString.startsWith("https://");
             if (condition) {
                 return message.channel.send(`${output}`);
-            }
+            } else {
 
             message.channel.send(`\`\`\`js\n${output}\`\`\``);
+            }
         } catch (error) {
             message.channel.send(`\`\`\`js\n${error}\`\`\``);
             console.log(error);

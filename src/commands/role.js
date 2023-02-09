@@ -23,8 +23,12 @@ module.exports = class RoleCommand {
              message.reply("that is not a valid role")
          } else {
              if (target.manageable) {
+                 if (target.roles.has(role)) {
+                     message.reply("that member already has this role")
+                 } else {
           target.roles.add(role)
           message.channel.send({ embeds: [embed] })
+                 }   
              } else {
                  message.reply("i do not have permission to do that")
              }

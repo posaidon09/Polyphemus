@@ -13,9 +13,13 @@ module.exports = class NickCommand {
 	        message.reply("that nickname is too long")
 	    }
 	    else if (nick.length == 0) {
-	        message.reply("you didn't provide a nick")
+	        message.reply("you didn't provide a nickname")
 	    } else {
+	        if (message.member.manageable) {
 	        message.member.setNickname(nick)
+	        } else {
+	            message.reply("i do not have permission to do that")
+	        }
 	    }
 	  } catch (err) {
 	      message.reply("missing permissions")

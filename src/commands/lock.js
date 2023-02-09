@@ -1,3 +1,4 @@
+ const { PermissionsBitField } = require("discord.js")
 module.exports = class LockCommand {
 
     constructor() {
@@ -9,8 +10,8 @@ module.exports = class LockCommand {
     async run({
         message, commands, args, mentioned
     }) {
-        const PermissionsBitField = require("discord.js")
-        if (message.author.id === "936638216604385320") {
+       
+        if (message.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
 
             message.channel.permissionOverwrites.edit(message.guild.id, {
                 SendMessages: false
