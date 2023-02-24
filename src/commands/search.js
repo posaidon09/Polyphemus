@@ -89,7 +89,7 @@ module.exports = class SearchCommand {
               
               pagecount.set(message.author.id, page3 - 1)
        //PAGE CHECK       
-            if (page3 <= 1) {
+            if (page3 <= 2) {
              const embed4 = new Discord.EmbedBuilder()
         .setTitle(query)
         .setImage(result3.url)

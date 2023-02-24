@@ -33,6 +33,10 @@ class Client extends Discord.Client {
 			await this.handler.handle(message);
 		});
 		
+
+	        
+	        
+	    
 		this.login(process.env.TOKEN);
 	};
 };
