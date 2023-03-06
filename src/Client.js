@@ -11,7 +11,7 @@ const _CommandHandler = require("./lib/CommandHandler");
 class Client extends Discord.Client {
 	constructor(options={}) {
 		const { intents, commandPath, debug, prefix, admins } = options;
-		const _intents = intents ?? ["MessageContent", "Guilds", "GuildMessages"];
+		const _intents = intents ?? ["MessageContent", "Guilds", "GuildMessages", "GuildMembers"];
 		const _commandPath = commandPath ?? "./src/commands";
 		const _debug = debug ?? true;
 		

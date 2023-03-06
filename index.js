@@ -12,22 +12,28 @@ global.storage = new Salvis("player_data", { path: "./src/storage/players" , aut
 
 
 
-client.on("ready", () => {
-  const slashCommands = client.application.commands;
+client.on("messageCreate", async message => {
   
-  slashCommands.create({
-    name: "ping",
-    description: "replies with pong"
-  });
+    if (message.author.bot) return
+    const logchannel = storage.box("multi")
+    
+    let chaenele = [...logchannel.values()]
+    
+   
+   chaenele.shift()
+    const messag = message.content
+    
+ if (!logchannel.has(message.channel.id)) return
+     
+chaenele.forEach((id) => {
+    
+  const cha = client.channels.cache.get(id);
+  console.log(chaenele)
+  cha?.send(`something`);
+  
 });
 
-client.on("interactionCreate", (interaction) => {
-  if (!interaction.isCommand()) return;
-
-  const { commandName, options } = interaction;
-  if (commandName === "ping") {
-    interaction.reply({
-      content: "pong"
-    });
-  }
-});
+    
+    
+ })
+ 

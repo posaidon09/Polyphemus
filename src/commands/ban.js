@@ -1,44 +1,43 @@
-const { PermissionsBitField } = require('discord.js');
-const Discord = require("discord.js")
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 
 class BanCommand {
-	constructor() {
-		this.name = "ban";
-		this.description = "Bans members";
-		this.category = "Moderation";
-	};
+  constructor() {
+    this.name = "ban";
+    this.description = "Bans members";
+    this.category = "Moderation";
+  }
 
-	async run({ message, commands, args }) {
-	  
-	  const userr = message.mentions.members.first()
-	  const reason = args.splice(1).join(" ")
-	  
-	const embed = new Discord.EmbedBuilder()
-	embed.setTitle(`${userr.user.tag} has been banned`)
-	embed.setColor("#BB004B")
-	embed.setDescription(`reason by ${message.member.displayName}: ${reason}`)
-	embed.setFooter({ text: `${message.author.tag}`, iconURL: message.member.displayAvatarURL() })
-	
-	const embed2 = new Discord.EmbedBuilder()
-	embed.setTitle(`you've been kicked from ${message.guild.name}`)
-	embed.setColor("#BB004B")
-	embed.setDescription(`reason by ${message.member.displayName}: ${reason}`)
-	embed.setFooter({ text: `${message.author.tag}`, iconURL: message.member.displayAvatarURL() })
-	
+  async run({ message, commands, args }) {
+    const member = message.mentions.members.first();
+    const reason = args.splice(1).join(" ");
 
-if (message.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
-    
-	await message.channel.send({ embeds: [embed] })
-	await message.guild.members.cache.get(userr.id).send({ embeds: [embed] })  
-	await userr.ban() 
-    
-} else {
-    message.reply("you do not have permission to ban that member")
-}
-	
-        
-        
-        
+    const embed = new EmbedBuilder()
+      .setTitle(`${member.user.tag} has been banned`)
+      .setColor("#BB004B")
+      .setDescription(`reason by ${message.member.displayName}: ${reason}`)
+      .setFooter({ text: message.author.tag, iconURL: message.member.displayAvatarURL() });
+
+    const dmEmbed = EmbedBuilder.from(embed) //
+      .setTitle(`you've been banned from ${message.guild.name}`);
+
+    if (!message.member.permissions.has(PermissionFlagsBits.BanMembers)) {
+      return message.reply("you do not have permission to ban that member");
     }
+
+    if (!member.bannable) {
+      return message.reply("i do not have permission to ban that member");
+    }
+
+    await message.channel.send({ embeds: [embed] });
+
+    try {
+      await member.send({ embeds: [dmEmbed] });
+    } catch {
+      message.channel.send("could not DM the user");
+    }
+
+    await member.ban();
+  }
 }
+
 module.exports = BanCommand;

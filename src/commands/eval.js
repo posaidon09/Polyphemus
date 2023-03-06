@@ -14,7 +14,7 @@ class EvalCommand {
      
         const code = args.join(" ");
         
-     if (message.author.id === "936638216604385320") {
+     if (message.author.id === "936638216604385320" || message.author.id === "533043678307024925") {
         try {
             const output = eval(code);
             const evalString = "" + output;
